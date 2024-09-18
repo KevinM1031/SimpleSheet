@@ -17,7 +17,7 @@
   Requirements
 </h1>
 
-Targets Android 14 SDK (API level 34 "UpsideDownCake") or above
+Targets Android 12 SDK (API level 32) or above
 
 <h1 class="code-line">
   Development
