@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -755,6 +756,151 @@ fun SheetOptionsDialog(
                             Text("Delete")
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun ViewItemDialog(
+    mainText: String,
+    labelText: String,
+    dataText: String,
+    onDismissRequest: () -> Unit,
+    onCopyClicked: (String, String) -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {}
+    Dialog(
+        onDismissRequest = { onDismissRequest() },
+    ) {
+
+        val smallPadding = dimensionResource(R.dimen.padding_small)
+        val mediumPadding = dimensionResource(R.dimen.padding_medium)
+        val largePadding = dimensionResource(R.dimen.padding_large)
+        val scrollState = rememberScrollState()
+
+        Card(
+            colors = CardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .padding(mediumPadding)
+                    .fillMaxWidth()
+
+            ) {
+                Text(
+                    text = "Inspect Item",
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(top = mediumPadding, bottom = largePadding)
+                )
+                Text(
+                    text = "Main text",
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Card(
+                    colors = CardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                    modifier = Modifier
+                        .padding(bottom = mediumPadding)
+                        .fillMaxWidth()
+                        .combinedClickable(
+                            onClick = { onCopyClicked(mainText, "Main text") },
+                            onLongClick = { onCopyClicked(mainText, "Main text") },
+                        )
+                ) {
+                    Text(
+                        text = mainText,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(smallPadding)
+                    )
+                }
+                Text(
+                    text = "Label text",
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Card(
+                    colors = CardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                    modifier = Modifier
+                        .padding(bottom = mediumPadding)
+                        .fillMaxWidth()
+                        .combinedClickable(
+                            onClick = { onCopyClicked(labelText, "Label text") },
+                            onLongClick = { onCopyClicked(labelText, "Label text") },
+                        )
+                ) {
+                    Text(
+                        text = labelText,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(smallPadding)
+                    )
+                }
+                Text(
+                    text = "Data text",
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Card(
+                    colors = CardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                    modifier = Modifier
+                        .padding(bottom = largePadding)
+                        .fillMaxWidth()
+                        .combinedClickable(
+                            onClick = { onCopyClicked(dataText, "Data text") },
+                            onLongClick = { onCopyClicked(dataText, "Data text") },
+                        )
+                ) {
+                    Text(
+                        text = dataText,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(smallPadding)
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth().padding(mediumPadding)
+            ) {
+                Button(
+                    onClick = onDismissRequest,
+                    shape = RoundedCornerShape(0.dp),
+                    modifier = Modifier.size(120.dp, 40.dp)
+                ) {
+                    Text("Close")
                 }
             }
         }

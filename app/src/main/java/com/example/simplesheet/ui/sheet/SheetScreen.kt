@@ -150,6 +150,7 @@ fun SheetScreen(
 
     val sheet = viewModel.sheet.collectAsState()
     val items = viewModel.items.collectAsState()
+    val selectedItem = viewModel.selectedItem.collectAsState()
     val noteText = viewModel.noteText.collectAsState()
     val editPermission = viewModel.editPermission.collectAsState()
     val requestPending = viewModel.requestPending.collectAsState()
@@ -587,29 +588,39 @@ fun SheetScreen(
                     )
 
             SheetDialogState.EditItem ->
-                TripleTextFieldDialog(
-                    titleText = "Edit item",
-                    confirmText = "Save",
-                    tertiaryButtonText = "Delete",
-                    textFieldLabel1 = "Main text",
-                    textFieldLabel2 = "Label text",
-                    textFieldLabel3 = "Data text",
-                    maxInputSize1= StringLength.MAIN_TEXT,
-                    maxInputSize2 = StringLength.LABEL,
-                    maxInputSize3 = StringLength.LABEL,
-                    maxLines1 = 12,
-                    onDismissRequest = { viewModel.closeDialog() },
-                    onConfirmClicked = { viewModel.updateItem(inputText, inputText2, inputText3) },
-                    setUserInput1 = { inputText = it },
-                    setUserInput2 = { inputText2 = it },
-                    setUserInput3 = { inputText3 = it },
-                    userInput1 = inputText,
-                    userInput2 = inputText2,
-                    userInput3 = inputText3,
-                    focusManager = focusManager,
-                    onTertiaryButtonClicked = { viewModel.openConfirmDeleteItemDialog() },
-                    requestPending = requestPending.value,
+                if (editPermission.value) {
+                    TripleTextFieldDialog(
+                        titleText = "Edit item",
+                        confirmText = "Save",
+                        tertiaryButtonText = "Delete",
+                        textFieldLabel1 = "Main text",
+                        textFieldLabel2 = "Label text",
+                        textFieldLabel3 = "Data text",
+                        maxInputSize1 = StringLength.MAIN_TEXT,
+                        maxInputSize2 = StringLength.LABEL,
+                        maxInputSize3 = StringLength.LABEL,
+                        maxLines1 = 12,
+                        onDismissRequest = { viewModel.closeDialog() },
+                        onConfirmClicked = { viewModel.updateItem(inputText, inputText2, inputText3) },
+                        setUserInput1 = { inputText = it },
+                        setUserInput2 = { inputText2 = it },
+                        setUserInput3 = { inputText3 = it },
+                        userInput1 = inputText,
+                        userInput2 = inputText2,
+                        userInput3 = inputText3,
+                        focusManager = focusManager,
+                        onTertiaryButtonClicked = { viewModel.openConfirmDeleteItemDialog() },
+                        requestPending = requestPending.value,
                     )
+                } else {
+                    ViewItemDialog(
+                        mainText = selectedItem.value.text,
+                        labelText = selectedItem.value.label,
+                        dataText = selectedItem.value.data,
+                        onDismissRequest = { viewModel.closeDialog() },
+                        onCopyClicked = { text, label -> viewModel.copyStringToClipboard(context, text, label) },
+                    )
+                }
 
             SheetDialogState.SheetOptions ->
                 SheetOptionsDialog(

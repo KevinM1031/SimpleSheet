@@ -222,7 +222,7 @@ class SheetViewModelTest {
         coEvery { storageService.updateSheet(updatedSheet) } returns Unit
         viewModel.reloadSheet()
 
-        viewModel.updateSheet(title = updatedSheet.title, view = updatedSheet.view, fontSize = updatedSheet.fontSize)
+        viewModel.updateSheet(title = updatedSheet.title, view = updatedSheet.view, fontSize = updatedSheet.fontSize, maxLines = updatedSheet.maxLines)
 
         coVerify { storageService.updateSheet(updatedSheet) }
         assertEquals(updatedSheet, viewModel.sheet.value)
