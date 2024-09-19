@@ -392,14 +392,6 @@ fun SheetScreen(
                                 contentDescription = "Redo"
                             )
                         }
-                        Spacer(modifier = Modifier.weight(1f))
-                        Button(
-                            onClick = { viewModel.updateSheetNoteText() },
-                            shape = RoundedCornerShape(0.dp),
-                            modifier = Modifier.fillMaxHeight()
-                        ) {
-                            Text("Save")
-                        }
                     },
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -426,7 +418,10 @@ fun SheetScreen(
                     ),
                     onValueChange = { viewModel.rememberAndUpdateNoteText(it) },
                     readOnly = !editPermission.value,
-                    textStyle = LocalTextStyle.current.copy(fontSize = sheet.value.fontSize.value.sp),
+                    textStyle = LocalTextStyle.current.copy(
+                        fontSize = sheet.value.fontSize.value.sp,
+                        lineHeight = sheet.value.fontSize.value.sp * 1.3f
+                    ),
                     maxLines = StringLength.NOTEPAD_LINES,
                     modifier = Modifier
                         .fillMaxSize()
@@ -484,6 +479,7 @@ fun SheetScreen(
                                     text = text,
                                     overflow = TextOverflow.Ellipsis,
                                     fontSize = sheet.value.fontSize.value.sp,
+                                    lineHeight = sheet.value.fontSize.value.sp * 1.3f,
                                     color = color,
                                     maxLines = sheet.value.maxLines,
                                     modifier = modifier.padding(4.dp).fillMaxHeight().wrapContentHeight()
