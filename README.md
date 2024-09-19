@@ -17,7 +17,7 @@
   Requirements
 </h1>
 
-Targets Android 12 SDK (API level 32) or above
+Targets Android 14 SDK (API level 34 "UpsideDownCake") or above
 
 <h1 class="code-line">
   Development
@@ -35,16 +35,6 @@ Targets Android 12 SDK (API level 32) or above
   <code>Coroutine</code>, 
   <code>MVVM</code>,
   <code>Material 3</code>
-</p>
-
-<h1 class="code-line">
-  Testing
-</h1>
-
-<p>
-  Current master branch does not function due to issues with publishing on Google Play. 
-  Logging into application will not work with the version on master branch. 
-  For this reason, debug branch is currently set as default.
 </p>
   
 <h1 class="code-line">

@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.kevin1031.simplesheet"
+    namespace = "com.example.simplesheet"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.kevin1031.simplesheet"
+        applicationId = "com.example.simplesheet"
         minSdk = 27
         targetSdk = 34
         versionCode = 1

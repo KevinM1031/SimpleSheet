@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:940821727466:android:cc318b2c2467bde19baf93",
         "android_client_info": {
-          "package_name": "com.kevin1031.simplesheet"
+          "package_name": "com.example.simplesheet"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "940821727466-0ajmrogfj63mrn5rjin4sa7sid8q9v0a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kevin1031.simplesheet",
+            "package_name": "com.example.simplesheet",
             "certificate_hash": "812c7080d224986a075e9d59c0f9eefb7487622b"
           }
         },
